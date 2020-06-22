@@ -55,6 +55,7 @@ public class LocationActivity extends AppCompatActivity {
         cursor.close();
         sqlDB.close();
 
+        // 청구 번호 앞자리 숫자 기준으로 세자리 가져오기
         String target_num = target.replaceAll("[^\\d]", "");
         String target_num1 = target_num.substring(0,3);
         int target_n = Integer.parseInt(target_num1);

@@ -75,17 +75,17 @@ public class StateActivity extends AppCompatActivity {
         cursor.close();
         sqlDB.close();
 
-        // 리스트를 생성한다.
+        // 리스트를 생성
         list = new ArrayList<String>();
 
-        // 검색에 사용할 데이터을 미리 저장한다.
+        // 검색에 사용할 데이터을 미리 저장
         settingList();
 
-        // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
+        // 리스트의 모든 데이터를 arraylist에 복사 // list 복사본을 생성
         arraylist = new ArrayList<String>();
         arraylist.addAll(list);
 
-        // 리스트에 연동될 아답터를 생성한다.
+        // 리스트에 연동될 아답터 생성
         adapter = new StateAdapter(list, this);
         adapter.notifyDataSetChanged();
 

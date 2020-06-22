@@ -15,10 +15,14 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static java.lang.Thread.sleep;
+
 public class LoanActivity extends AppCompatActivity {
 
     private Button buttonScan;
     private TextView Lnumber, Lclaim, Ltitle, Lauthor, Lpublisher, Llocation, textViewResult;
+
+    public static String booktitle3;
 
     //qr code scanner object
     private IntentIntegrator qrScan;
@@ -37,30 +41,30 @@ public class LoanActivity extends AppCompatActivity {
         Llocation = (TextView) findViewById(R.id.loan_location);
         textViewResult = (TextView)  findViewById(R.id.textViewResult);
 
-        //intializing scan object
+        // QR 스캔 오브젝트 선언
         qrScan = new IntentIntegrator(this);
 
-        //button onClick
+        // 버튼 이벤트
         buttonScan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //scan option
+                // 스캔 옵션
                 qrScan.setPrompt("Scanning...");
-                //qrScan.setOrientationLocked(false);
+                // QR 스캐너 동작
                 qrScan.initiateScan();
             }
         });
     }
 
-    //Getting the scan results
+    // QR 코드 스캔 결과 가져오기
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
-            //qrcode 가 없으면
+            // QR코드가 없으면
             if (result.getContents() == null) {
                 Toast.makeText(LoanActivity.this, "취소!", Toast.LENGTH_SHORT).show();
             } else {
-                //qrcode 결과가 있으면
+                // QR코드 결과가 있으면
                 Toast.makeText(LoanActivity.this, "스캔완료!", Toast.LENGTH_SHORT).show();
                 try {
                     //data를 json으로 변환
@@ -71,9 +75,15 @@ public class LoanActivity extends AppCompatActivity {
                     Lauthor.setText(obj.getString("Author"));
                     Lpublisher.setText(obj.getString("Publisher"));
                     Llocation.setText(obj.getString("Location"));
-                } catch (JSONException e) {
+
+                    sleep(3000);
+
+                    booktitle3 = obj.getString("Title");
+                    Intent intent = new Intent(getApplicationContext(), InforActivity.class);
+                    startActivity(intent);
+
+                } catch (JSONException | InterruptedException e) {
                     e.printStackTrace();
-                    //Toast.makeText(MainActivity.this, result.getContents(), Toast.LENGTH_LONG).show();
                     textViewResult.setText(result.getContents());
                 }
             }

@@ -56,6 +56,7 @@ public class SearchAdapter extends BaseAdapter {
         // 리스트에 있는 데이터를 리스트뷰 셀에 뿌린다.
         viewHolder.label.setText(list.get(position));
 
+        // 리스트 뷰 셀 선택시 그 셀의 책 제목을 전역 변수로 저장 후 상세 정보창으로 변환하며 전역 변수 넘겨줌
         viewHolder.label.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

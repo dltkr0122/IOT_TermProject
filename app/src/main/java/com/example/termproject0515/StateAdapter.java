@@ -52,7 +52,7 @@ public class StateAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        // 리스트에 있는 데이터를 리스트뷰 셀에 뿌린다.
+        // 리스트에 있는 데이터를 리스트뷰 셀에 뿌림
         viewHolder.label.setText(list.get(position));
 
         viewHolder.label.setOnClickListener(new View.OnClickListener() {

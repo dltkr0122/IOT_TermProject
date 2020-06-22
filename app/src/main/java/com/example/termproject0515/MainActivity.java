@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("책 어디에 있나?");
 
-        search_btn = (Button)findViewById(R.id.search_button);
+        // 버튼을 통한 화면 전환
+       search_btn = (Button)findViewById(R.id.search_button);
 
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,7 +34,14 @@ public class InforActivity extends AppCompatActivity {
         setContentView(R.layout.activity_infor);
         setTitle("도서 상세 정보");
 
-        booktitle2 = SAdapter.booktitle;
+        if (booktitle2 == null){
+            booktitle2 = LoanActivity.booktitle3;
+        }
+
+        if (booktitle2 == null) {
+            booktitle2 = SAdapter.booktitle;
+        }
+
 
         info_title = (TextView) findViewById(R.id.info_title);
         info_author = (TextView) findViewById(R.id.info_author);
@@ -51,6 +58,7 @@ public class InforActivity extends AppCompatActivity {
 
         take_btn = (Button) findViewById(R.id.take_button);
 
+        // 대출 버튼 누를 시 DB에서 대출한 책의 대출데이터 0으로 변경
         take_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +104,8 @@ public class InforActivity extends AppCompatActivity {
             info_author.setText(get_author);
             info_publisher.setText(get_publisher);
             info_location.setText(get_location);
+
+            // DB에서 가져온 데이터 기준 1이면 대출 가능 0이면 대출 불가
             if(get_state == 1){
                 info_state.setText("대출 가능");
                 info_state.setTextColor(Color.parseColor("#00cc00"));
@@ -107,6 +117,7 @@ public class InforActivity extends AppCompatActivity {
 
         cursor.close();
         sqlDB.close();
+        booktitle2 = null;
 
 
     }
